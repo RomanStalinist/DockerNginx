@@ -1,0 +1,35 @@
+services:
+  php:
+    build: ./api
+    container_name: php_api
+    volumes:
+      - ./api:/var/www/html
+    networks:
+      - app-network
+
+  nginx:
+    build: ./nginx
+    container_name: nginx_server
+    ports:
+      - "80:80"
+    volumes:
+      - ./api:/var/www/html
+    networks:
+      - app-network
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mouse_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3307"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
