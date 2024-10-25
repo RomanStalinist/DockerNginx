@@ -1,7 +1,5 @@
 <?php
 
-echo '<pre>';
-
 // Настройки базы данных
 $host = 'mysql_db';
 $db = 'mouse_db';
@@ -59,8 +57,6 @@ switch ($method) {
         echo json_encode(['error' => 'Method not allowed'], JSON_PRETTY_PRINT);
         break;
 }
-
-echo '</pre>';
 
 // Закрываем соединение с базой данных
 $conn->close();
